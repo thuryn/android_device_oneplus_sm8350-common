@@ -77,6 +77,10 @@ function blob_fixup() {
             sed -i "/SystemCamera = / s/1;/0;/g" "${2}"
             sed -i "/SystemCamera = / s/0;$/1;/" "${2}"
             ;;
+        odm/lib64/libAlgoProcess.so)
+            [ "$2" = "" ] && return 0
+            sed -i "s/android.hardware.graphics.common-V1-ndk_platform.so/android.hardware.graphics.common-V5-ndk.so\x00\x00\x00\x00\x00\x00\x00\x00\x00/" "${2}"
+            ;;
         product/app/PowerOffAlarm/PowerOffAlarm.apk)
             [ "$2" = "" ] && return 0
             apktool_patch "${2}" "${MY_DIR}/blob-patches/PowerOffAlarm.patch" -s
@@ -84,6 +88,10 @@ function blob_fixup() {
         product/etc/sysconfig/com.android.hotwordenrollment.common.util.xml)
             [ "$2" = "" ] && return 0
             sed -i "s/\/my_product/\/product/" "${2}"
+            ;;
+        system_ext/lib/libwfdservice.so)
+            [ "$2" = "" ] && return 0
+            sed -i "s/android.media.audio.common.types-V2-cpp.so/android.media.audio.common.types-V3-cpp.so/" "${2}"
             ;;
         system_ext/lib64/libwfdnative.so)
             [ "$2" = "" ] && return 0
@@ -109,13 +117,18 @@ function blob_fixup() {
             [ "$2" = "" ] && return 0
             sed -i "s/IGNORED_IRQ=27,23,38$/&,115,332/" "${2}"
             ;;
+        vendor/lib/hw/audio.primary.lahaina.so)
+            [ "$2" = "" ] && return 0
+            sed -i "s/\/vendor\/lib\/liba2dpoffload.so/\/odm\/lib\/liba2dpoffload.so\x00\x00\x00/" "${2}"
+            sed -i "s/\/vendor\/lib\/libssrec.so/\/odm\/lib\/libssrec.so\x00\x00\x00/" "${2}"
+            ;;
         vendor/lib/libgui1_vendor.so)
             [ "$2" = "" ] && return 0
             "${PATCHELF}" --replace-needed "libui.so" "libui-v30.so" "${2}"
             ;;
         vendor/lib64/vendor.qti.hardware.camera.postproc@1.0-service-impl.so)
             [ "$2" = "" ] && return 0
-            "${SIGSCAN}" -p "23 0B 00 94" -P "1F 20 03 D5" -f "${2}"
+            "${SIGSCAN}" -p "27 0B 00 94" -P "1F 20 03 D5" -f "${2}"
             ;;
         odm/lib/liblvimfs_wrapper.so|odm/lib64/libCOppLceTonemapAPI.so|odm/lib64/libaps_frame_registration.so|vendor/lib64/libalsc.so)
             [ "$2" = "" ] && return 0
