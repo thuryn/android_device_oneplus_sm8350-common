@@ -30,10 +30,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     AntHalService-Soong
 
-# Atrace
-PRODUCT_PACKAGES += \
-    android.hardware.atrace@1.0-service
-
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@6.0-impl \
@@ -119,7 +115,6 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@4.0-impl-qti-display \
     init.qti.display_boot.rc \
     init.qti.display_boot.sh \
-    libmemutils \
     vendor.qti.hardware.display.allocator-service \
     vendor.qti.hardware.display.composer-service.rc \
     vendor.qti.hardware.display.composer-service.xml \
@@ -254,7 +249,6 @@ PRODUCT_PACKAGES += \
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors@2.0-service.multihal \
-    libsensorndkbridge \
     sensors.oplus
 
 PRODUCT_COPY_FILES += \
