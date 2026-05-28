@@ -182,3 +182,7 @@ wifi.aware.interface=wifi-aware0
 
 # Zygote
 zygote.critical_window.minute=10
+
+# remove useless extensive loging
+log.tag.HeartAuthService=WARN
+log.tag.HeartAuthInterface=WARN
