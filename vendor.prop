@@ -186,3 +186,12 @@ zygote.critical_window.minute=10
 # remove useless extensive loging
 log.tag.HeartAuthService=WARN
 log.tag.HeartAuthInterface=WARN
+
+# Vypnutí VPP filtrů pro Codec2
+vendor.media.vpp.enable=false
+vendor.video.vpp.enable=false
+# Zabránění pokusům o načtení VPP filtrů do pipeline
+persist.vendor.vpp.enable=0
+# Vypnutí pokusů o aktivaci HALu
+ro.vendor.media.vpp.enable=false
+
